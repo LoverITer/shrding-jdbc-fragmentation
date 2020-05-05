@@ -1,0 +1,37 @@
+#sharding:
+#  jdbc:
+#    dataSource:
+#      names: db-test0,db-test1
+#      db-test0:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driverClassName: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3306/bj_sharding?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+#        username: root
+#        password: 123456
+#        maxPoolSize: 20
+#      db-test1:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driverClassName: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://localhost:3307/bj_sharding?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT
+#        username: root
+#        password: 123456
+#        maxPoolSize: 20
+#    config:
+#      # 配置数据分表
+#      sharding:
+#        tables:
+#          user:
+#            table-strategy:
+#              standard:
+#                sharding-column: id
+#                precise-algorithm-class-name: top.qrainly.sharding.jdbc.config.MyPreciseShardingAlgorithm
+#            # 读取ds_0数据源的user_0、user_1、user_2、user_3
+#            actual-data-nodes: ds_0.user_$->{0..3}
+#        master-slave-rules:
+#          ds_0:
+#            master-data-source-name: db-test0
+#            slave-data-source-names: db-test1
+#    props:
+#      sql:
+#        # 开启SQL显示，默认值: false，注意：仅配置读写分离时不会打印日志！！！
+#        show: true

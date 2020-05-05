@@ -1,0 +1,30 @@
+#sharding:
+#  jdbc:
+#    dataSource:
+#      names: db-test0,db-test1
+#      db-test0:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driverClassName: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://192.168.92.131:3307/sharding?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=GMT
+#        username: root
+#        password: 123456
+#        maxPoolSize: 20
+#      db-test1:
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        driverClassName: com.mysql.jdbc.Driver
+#        url: jdbc:mysql://192.168.92.131:3308/bj_sharding?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT
+#        username: root
+#        password: 123456
+#        maxPoolSize: 20
+#    config:
+#      # 仅配置读写分离时打开此配置
+#      masterslave:
+#        # 配置从库选择策略，提供轮询与随机，这里选择用轮询//random 随机 //round_robin 轮询
+#        load-balance-algorithm-type: round_robin
+#        name: db1s2
+#        master-data-source-name: db-test0
+#        slave-data-source-names: db-test1
+#    props:
+#      sql:
+#        # 开启SQL显示，默认值: false，注意：仅配置读写分离时不会打印日志！！！
+#        show: true

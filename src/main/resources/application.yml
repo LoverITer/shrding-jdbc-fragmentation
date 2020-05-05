@@ -1,0 +1,18 @@
+server:
+  port: 8080
+debug: true
+spring:
+  application:
+    name: sharding-jdbc-test
+  profiles:
+    active: sharding
+
+
+# mybatis  configuration
+mybatis:
+  config-location: classpath:/mybatis/mybatis-config.xml
+  # mapper-locations: classpath:/mybatis/mapper/*.xml
+
+# log configuration
+logging:
+  config: classpath:logback-spring.xml
